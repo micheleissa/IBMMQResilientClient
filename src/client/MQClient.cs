@@ -73,7 +73,7 @@ namespace IBMMQResilientClient
 
         public MQQueue GetResilientQueue(string queueName, int openOptions)
         {
-            var policyResult = _defaultPolicy.ExecuteAndCapture(() => GetQueue(queueName, openOptions));
+            var policyResult = _defaultPolicy.ExecuteAndCapture(() => GetQueue(queueName ?? _queueOptions.Name, openOptions));
             EnsureSuccess(policyResult);
             return policyResult.Result;
         }

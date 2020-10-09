@@ -8,12 +8,12 @@
     <RepositoryUrl>https://github.com/micheleissa/IBMMQResilientClient</RepositoryUrl>
     <PackageTags>C# ibm mq netcore queue</PackageTags>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
-    <PackageVersion>0.1.0</PackageVersion>
+    <PackageVersion>0.2.0</PackageVersion>
     <IsPackable>true</IsPackable>
     <Company />
     <RepositoryType>GitHub</RepositoryType>
-    <AssemblyVersion>0.0.1.0</AssemblyVersion>
-    <FileVersion>0.0.1.0</FileVersion>
+    <AssemblyVersion>0.0.2.0</AssemblyVersion>
+    <FileVersion>0.0.2.0</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -28,7 +28,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="..\LICENSE">
+    <None Include="..\..\LICENSE">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>

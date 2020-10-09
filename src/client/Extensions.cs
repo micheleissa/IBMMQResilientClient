@@ -24,8 +24,8 @@ namespace IBMMQResilientClient
             using (var serviceProvider = services.BuildServiceProvider())
             {
                 var configuration = serviceProvider.GetService<IConfiguration>();
-                services.Configure<QueueOptions>(configuration.GetSection("ibmMqOptions"));
-                queueOptions = configuration.GetOptions<QueueOptions>("ibmMqOptions");
+                services.Configure<QueueOptions>(configuration.GetSection("queueOptions"));
+                queueOptions = configuration.GetOptions<QueueOptions>("queueOptions");
             }
             services.AddSingleton(queueOptions);
             services.AddSingleton<IMQClient, MQClient>();
