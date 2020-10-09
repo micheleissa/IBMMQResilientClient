@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -6,10 +6,12 @@
     <Description>dotnet core client for IBM MQ with built-in resiliency and the ability to connect securely</Description>
     <PackageProjectUrl>https://github.com/micheleissa/IBMMQResilientClient</PackageProjectUrl>
     <RepositoryUrl>https://github.com/micheleissa/IBMMQResilientClient</RepositoryUrl>
-    <PackageTags>C# ibmmq netcore queue</PackageTags>
+    <PackageTags>C# ibm mq netcore queue</PackageTags>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageVersion>1.0.0</PackageVersion>
     <IsPackable>true</IsPackable>
+    <Company />
+    <RepositoryType>GitHub</RepositoryType>
   </PropertyGroup>
 
   <ItemGroup>
