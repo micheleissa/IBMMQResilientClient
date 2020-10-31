@@ -10,7 +10,8 @@ namespace IBMMQResilientClient
         public string Channel { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
-        
+        public int RetryCount { get; set; }
+
         //TBD: future use
         public string SubscriptionName { get; set; }
         public string Topic { get; set; }
@@ -20,6 +21,7 @@ namespace IBMMQResilientClient
         public string ClientCert { get; set; }
         public string ServerCert { get; set; }
         public bool InstallCert { get; set; }
+        public string CipherSpec { get; set; }
     }
 
     public class MqHostOptions

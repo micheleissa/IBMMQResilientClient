@@ -37,14 +37,14 @@ namespace IBMMQResilientClient
                 }
                 else
                 {
-                    _logger.LogError(ex, $"Error getting message from IBM MQ {ex.ToString()} {ex.GetErrorCodeDescription()}");
+                    _logger.LogError(ex, $"Error getting message from IBM MQ {ex.Message} {ex.GetErrorCodeDescription()}");
                     throw;
                 }
 
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, $"Error getting message from IBM MQ {ex.ToString()} ");
+                _logger.LogError(ex, $"Error getting message from IBM MQ {ex.Message} ");
             }
             finally
             {
@@ -78,13 +78,13 @@ namespace IBMMQResilientClient
                 }
                 else
                 {
-                    _logger.LogError(ex, $"Error getting message from IBM MQ {ex.ToString()} {ex.GetErrorCodeDescription()}");
+                    _logger.LogError(ex, $"Error getting message from IBM MQ {ex.Message} {ex.GetErrorCodeDescription()}");
                     throw;
                 }
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, $"Error getting message from IBM MQ {ex.ToString()} ");
+                _logger.LogError(ex, $"Error getting message from IBM MQ {ex.Message} ");
             }
             finally
             {
@@ -115,7 +115,7 @@ namespace IBMMQResilientClient
 
             if (timeSpan.TotalMinutes > QueueEmptyReportTimeIntervalMinutes)
             {
-                _logger.LogWarning($"Queue is empty error getting the message.{ex.ToString()} {ex.GetErrorCodeDescription()}");
+                _logger.LogWarning($"Queue is empty error getting the message.{ex.Message} {ex.GetErrorCodeDescription()}");
                 LastQueueEmptyWarningReported = DateTimeOffset.UtcNow;
             }
 

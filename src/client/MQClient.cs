@@ -19,8 +19,7 @@ namespace IBMMQResilientClient
         private Hashtable _connectionOptions;
         private MQQueueManager _manager;
         private readonly ILogger<MQClient> _logger;
-        private readonly RetryPolicy _defaultPolicy = Policy.Handle<MQException>()
-                                .WaitAndRetry(5, retryAttempt => TimeSpan.FromSeconds(Math.Pow(2, retryAttempt)));
+        private readonly RetryPolicy _defaultPolicy;
         public MQClient(QueueOptions mqOptions, ILogger<MQClient> logger)
         {
             _queueOptions = mqOptions;
@@ -30,6 +29,8 @@ namespace IBMMQResilientClient
             {
                 InstallCerts();
             }
+            _defaultPolicy = Policy.Handle<MQException>()
+                                .WaitAndRetry(_queueOptions.RetryCount > 0 ? _queueOptions.RetryCount : 5, retryAttempt => TimeSpan.FromSeconds(Math.Pow(2, retryAttempt)));
         }
 
 
@@ -55,7 +56,7 @@ namespace IBMMQResilientClient
 
         public MQQueue GetQueue(string queueName, int openOptions)
         {
-            MQQueue queue = null;
+            MQQueue queue;
             try
             {
                 queue = Manager.AccessQueue(queueName, openOptions);
@@ -101,7 +102,7 @@ namespace IBMMQResilientClient
             }
             catch (MQException ex)
             {
-                _logger.LogError(ex, $"A WebSphere MQ error occurred while creating Connection to QManager [{QManagerName}] : {ex.ToString()}");
+                _logger.LogError(ex, $"A WebSphere MQ error occurred while creating Connection to QManager [{QManagerName}] : {ex}");
                 throw;
             }
 
@@ -117,7 +118,7 @@ namespace IBMMQResilientClient
             _connectionOptions = new Hashtable()
                 {
                     { MQC.TRANSPORT_PROPERTY, MQC.TRANSPORT_MQSERIES_MANAGED },
-                    {MQC.APPNAME_PROPERTY, _queueOptions.AppName },
+                    { MQC.APPNAME_PROPERTY, _queueOptions.AppName },
                     { MQC.CHANNEL_PROPERTY, _queueOptions.Channel },
                     { MQC.CONNECT_OPTIONS_PROPERTY, MQC.MQCNO_RECONNECT_Q_MGR },
                     { MQC.CONNECTION_NAME_PROPERTY, string.Join(",", _queueOptions.MqHostOptionsList.Select(opt => $"{opt.HostName}({opt.Port})"))},
@@ -127,7 +128,7 @@ namespace IBMMQResilientClient
             if (_queueOptions.InstallCert)
             {
                 //TLS
-                _connectionOptions.Add(MQC.SSL_CIPHER_SPEC_PROPERTY, "TLS_RSA_WITH_AES_128_CBC_SHA256");
+                _connectionOptions.Add(MQC.SSL_CIPHER_SPEC_PROPERTY, _queueOptions. CipherSpec ?? "TLS_RSA_WITH_AES_128_CBC_SHA256");
                 _connectionOptions.Add(MQC.SSL_CERT_STORE_PROPERTY, "*USER");
             }
         }

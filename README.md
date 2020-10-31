@@ -1,11 +1,11 @@
-# IBMMQResilientClient
+# IBMMQResilientClient   ![Nuget](https://img.shields.io/nuget/dt/IBMMQResilientClient?style=flat-square)
 dotnet core client for IBM MQ with built-in resiliency and the ability to connect securely.   
 
 # Features:
  - Retry capability via Polly.
  - TLS support(optional).
 ## Retry:
- - Polly is used for resiliency and the retry option allows for exponential backoff.
+ - [Polly](https://github.com/App-vNext/Polly) is used for resiliency and the retry option allows for exponential backoff.
  ```
  // Retry a specified number of times, using a function to 
 // calculate the duration to wait between retries based on 
@@ -22,7 +22,7 @@ Policy
 	TimeSpan.FromSeconds(Math.Pow(2, retryAttempt)) 
   );
   ````
-  - Again it is not configurable but it is a possibility in the future.
+  - It is not configurable but it is a possibility in the future.
 ## TLS support:
 - As of now the support is not fully configurable, it supports one CipherSpec ```TLS_RSA_WITH_AES_128_CBC_SHA256```.
 - the library is smart about the installation of the certs and will figure out which OS and installs accordingly. 
