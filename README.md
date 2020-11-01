@@ -22,10 +22,11 @@ Policy
 	TimeSpan.FromSeconds(Math.Pow(2, retryAttempt)) 
   );
   ````
-  - It is not configurable but it is a possibility in the future.
+  - configurable retry count.
 ## TLS support:
-- As of now the support is not fully configurable, it supports one CipherSpec ```TLS_RSA_WITH_AES_128_CBC_SHA256```.
-- the library is smart about the installation of the certs and will figure out which OS and installs accordingly. 
+- Configurable Cipher Spec.
+- The library is smart about the installation of the certs and will figure out which OS and installs accordingly.
+- The library supports MQManager failover via allowing multiple host(port) pairs in the configuration settings. 
 
 # HowTo:
  - Add configuration/settings:
@@ -41,6 +42,8 @@ Policy
 		"clientCert": "",
 		"serverCert": "",
 		"subscriptionName": "subName",
+		"cipherSpec": "VALID_CIPHER_SPEC", //Optional if not set will defaulted to TLS_RSA_WITH_AES_128_CBC_SHA256
+		"retryCount": INT_VALUE, //Optional if not set will be defaulted to 5 used to control exponential backoff of Polly retry logic
 		"topic": "dev/",
 		"mqHostOptionsList": [
 			{
